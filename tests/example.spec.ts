@@ -1,18 +1,38 @@
-import { test, expect } from '@playwright/test';
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+import { test } from '@playwright/test'
+import { HomePage } from './pages/HomePage'
+import { ESGKpiPage } from './pages/ESGKpiPage'
+import { ContactPage } from './pages/ContactPage'
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+test.only('Test 1 — verify solutions section', async ({ page }) => {
+  const home = new HomePage(page)
+  await home.goto()
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  await home.scrollToSolutionsSection()
+  await page.pause()
+  await home.verifySolutionBlockContent({
+    link: 'https://www.sapfioneer.com/banking/',
+    title: 'Banking',
+    description: 'Reach more customers and build trust with real-time financial insights and risk control. Join the 800 banks globally who have chosen our platform.'
+  })
+})
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
+test('Test 2 — verify ESG KPI page', async ({ page }) => {
+  const home = new HomePage(page)
+  const esg = new ESGKpiPage(page)
 
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
-});
+  await home.goto()
+  await home.openEsgKpiEngine()
+  await esg.verifyPageOpened()
+})
+
+test('Test 3 — verify email validation on contact form', async ({ page }) => {
+  const home = new HomePage(page)
+  const contact = new ContactPage(page)
+
+  await home.goto()
+  await home.clickGetInTouch()
+  await contact.verifyPageOpened()
+  await contact.enterInvalidEmail()
+  await contact.verifyEmailValidationMessage()
+})
