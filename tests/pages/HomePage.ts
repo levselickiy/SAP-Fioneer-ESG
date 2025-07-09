@@ -6,7 +6,7 @@ export class HomePage extends BasePage {
     private s = homeSelectors(this.page)
 
     async goto() {
-        await this.page.goto('https://www.sapfioneer.com/')
+        await this.page.goto('/')
     }
 
     async verifySolutionsVisible() {
@@ -51,4 +51,15 @@ export class HomePage extends BasePage {
         await this.scrollToElement(this.s.solutionsSection)
     }
 
+    async clickBySpanText(text: string) {
+        const el = this.page.locator('span', { hasText: text }).first()
+        await el.waitFor({ state: 'visible' })
+        await el.click()
+    }
+
+    async clickByTargetText(text: string) {
+        const el = this.page.locator('a', { hasText: text }).first()
+        await el.waitFor({ state: 'visible' })
+        await el.click()
+    }
 }
