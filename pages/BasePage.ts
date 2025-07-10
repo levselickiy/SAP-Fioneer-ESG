@@ -27,8 +27,7 @@ export class BasePage {
     }
 
     async clickByText(text: string) {
-        const el = this.page.getByText(text, { exact: true })
-        await el.waitFor({ state: 'visible' })
-        await el.click()
+        const locator = this.page.getByText(text, { exact: true }).first()
+        await this.click(locator)
     }
 }

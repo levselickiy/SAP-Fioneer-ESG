@@ -9,16 +9,6 @@ export class HomePage extends BasePage {
         await this.page.goto('/')
     }
 
-    async verifySolutionsVisible() {
-        await this.s.solutionsSection.waitFor({ state: 'visible' })
-    }
-
-    async openEsgKpiEngine() {
-        await this.page.hover('text=Products')
-        await this.page.hover('text=Finance & ESG')
-        await this.click(this.s.esgKpiLink)
-    }
-
     async clickGetInTouch() {
         await this.click(this.s.getInTouchBtn)
     }
@@ -49,17 +39,5 @@ export class HomePage extends BasePage {
 
     async scrollToSolutionsSection() {
         await this.scrollToElement(this.s.solutionsSection)
-    }
-
-    async clickBySpanText(text: string) {
-        const el = this.page.locator('span', { hasText: text }).first()
-        await el.waitFor({ state: 'visible' })
-        await el.click()
-    }
-
-    async clickByTargetText(text: string) {
-        const el = this.page.locator('a', { hasText: text }).first()
-        await el.waitFor({ state: 'visible' })
-        await el.click()
     }
 }
