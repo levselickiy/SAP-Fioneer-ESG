@@ -1,6 +1,5 @@
 import { Page, test} from '@playwright/test'
 import { HomePage } from '../pages/HomePage'
-import { ESGKpiPage } from '../pages/ESGKpiPage'
 import { ContactPage } from '../pages/ContactPage'
 import { expect } from '@playwright/test'
 
@@ -13,7 +12,7 @@ test.beforeEach(async ({ page }) => {
   await home.goto()
 })
 
-test('Test 1 — verify solutions section', async ({}) => {
+test('Test 1 — verify solutions section', async ({page}) => {
   await home.scrollToSolutionsSection()
   await home.verifySolutionBlockContent({
     link: 'https://www.sapfioneer.com/banking/',
@@ -44,7 +43,7 @@ test('Test 2 — verify ESG KPI page', async ({ page }) => {
   await expect(page.getByText(/ESG KPI Engine provides a central solution/i)).toBeVisible()
 })
 
-test.only('Test 3 — verify invalid email on contact form', async ({ page }) => {
+test('Test 3 — verify invalid email on contact form', async ({ page }) => {
   await home.clickGetInTouch()
 
   const currentUrl = page.url()
