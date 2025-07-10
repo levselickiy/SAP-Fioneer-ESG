@@ -7,13 +7,13 @@ This repository contains a Playwright test suite written in TypeScript to automa
 Follow these steps to set up the project:
 
 
-1**Install Dependencies**:
+**Install Dependencies**:
    Install Node.js dependencies, including Playwright.
    ```bash
    npm install
    ```
 
-2**Install Playwright Browsers**:
+**Install Playwright Browsers**:
    Install the browsers required by Playwright.
    ```bash
    npx playwright install
