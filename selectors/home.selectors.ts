@@ -5,5 +5,5 @@ export const homeSelectors = (page: Page) => ({
     productsMenu: page.getByRole('link', { name: 'Products' }),
     financeEsgSubmenu: page.getByText('Finance & ESG'),
     esgKpiLink: page.getByRole('link', { name: 'ESG KPI Engine' }),
-    getInTouchBtn: page.getByRole('link', { name: 'Get in touch' }),
+    getInTouchBtn: page.locator('//div[@class="col-auto"]/a[@aria-label="Get in touch"]'),
 })
