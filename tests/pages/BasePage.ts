@@ -25,4 +25,10 @@ export class BasePage {
         await locator.scrollIntoViewIfNeeded()
         await this.page.waitForTimeout(300)
     }
+
+    async clickByText(text: string) {
+        const el = this.page.getByText(text, { exact: true })
+        await el.waitFor({ state: 'visible' })
+        await el.click()
+    }
 }
