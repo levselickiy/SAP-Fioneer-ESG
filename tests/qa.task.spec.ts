@@ -1,4 +1,4 @@
-import { Page, test} from '@playwright/test'
+import { test} from '@playwright/test'
 import { HomePage } from '../pages/HomePage'
 import { ContactPage } from '../pages/ContactPage'
 import { expect } from '@playwright/test'
@@ -34,9 +34,9 @@ test('Test 1 — verify solutions section', async ({page}) => {
 })
 
 test('Test 2 — verify ESG KPI page', async ({ page }) => {
-  await home.clickBySpanText('Products')
-  await home.clickBySpanText('Finance & ESG')
-  await home.clickByTargetText('ESG KPI Engine')
+  await home.clickByText('Products')
+  await home.clickByText('Finance & ESG')
+  await home.clickByText('ESG KPI Engine')
 
   const currentUrl = page.url()
   expect(currentUrl).toContain('/esg-kpi-engine')
@@ -48,6 +48,6 @@ test('Test 3 — verify invalid email on contact form', async ({ page }) => {
 
   const currentUrl = page.url()
   expect(currentUrl).toContain('/contact-sales')
-  await contact.enterInvalidEmail()
+  await contact.enterEmail('12314')
   await contact.verifyEmailValidationMessage()
 })
